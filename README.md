@@ -1,4 +1,4 @@
-# berenice-pt3
+
 Estudo de caso projeto 3: Sistema da  Berenice - Vendendo ++
 Introdução: As informações aqui contidas fazem parte do processo de desenvolvimento do projeto mensal intitulado, Sistema de Persistência de dados em Linguagem C.
 Portanto, devem ser analisadas e utilizadas como fonte de dados para planejamento e implementação do mesmo.
