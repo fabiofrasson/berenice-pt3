@@ -5,11 +5,6 @@
 #include <locale.h>
 #include <time.h>
 
-// Constantes das opções do menu
-#define menuOpcao1 "Produtos"
-#define menuOpcao2 "Vendas"
-#define menuOpcao3 "Sair"
-
 //Constantes dos números do código
 #define produtocodigo1 "18745"
 #define produtocodigo2 "45462"
