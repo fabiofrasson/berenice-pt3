@@ -5,27 +5,6 @@
 #include <locale.h>
 #include <time.h>
 
-//Constantes dos números do código
-#define produtocodigo1 "18745"
-#define produtocodigo2 "45462"
-#define produtocodigo3 "34654"
-#define produtocodigo4 "40"
-#define produtocodigo5 "5000"
-
-// Constantes dos nomes dos produtos
-#define produtoOpcao1 "Pão de Fôrma"
-#define produtoOpcao2 "Pão de Centeio"
-#define produtoOpcao3 "Broa de Milho"
-#define produtoOpcao4 "Sonho"
-#define produtoOpcao5 "Tubaína"
-
-// Constantes dos preços dos produtos
-#define precoProduto1 7.50
-#define precoProduto2 8.69
-#define precoProduto3 5.0
-#define precoProduto4 4.5
-#define precoProduto5 3.25
-
 void menu();
 void produtos();
 void vendas();
