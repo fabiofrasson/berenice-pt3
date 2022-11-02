@@ -115,6 +115,11 @@ void produtos(){
 }
 
 void exibir(){
+    
+    int produtocodigo1 "18745", produtocodigo2 "45462", produtocodigo3 "34654", produtocodigo4 "40", produtocodigo5 "5000";
+    char produtoOpcao1 "Pão de Fôrma", produtoOpcao2 "Pão de Centeio", produtoOpcao3 "Broa de Milho", produtoOpcao4 "Sonho", produtoOpcao5 "Tubaína";
+    float precoProduto1 7.50, precoProduto2 8.69, precoProduto3 5.0, precoProduto4 4.5, precoProduto5 3.25;
+    
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\tItem(Código)\tNome do Item\tValor(Unidade)\tEstoque");
     printf("\t\t\t\t1\t\t\t%s\t\tR$ %.2f\t\t\t%d\n", produtocodigo1, produtoOpcao1, precoProduto1); //estoqueItens[0]);
