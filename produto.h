@@ -1,5 +1,6 @@
 #ifndef PRODUTO_H_INCLUDED
 #define PRODUTO_H_INCLUDED
+#include <time.h>
 
 // Definição da struct
 typedef struct produto {
@@ -11,7 +12,7 @@ typedef struct produto {
 };
 
 // Corpo da função
-void salvarProdutos(struct produto *arr, int tam) {
+void salvarProdutosCadastrados(struct produto *arr, int tam) {
 
     char *filename = "produtos.txt";
 
@@ -23,6 +24,37 @@ void salvarProdutos(struct produto *arr, int tam) {
     }
 
     fprintf(fp, "quantidade_produtos\n");
+
+    for(int i = 0; i < tam; i++) {
+        fprintf(fp, "\n%d\n", arr[i].codigo);
+        fprintf(fp, "%s\n", arr[i].nomeProduto);
+        fprintf(fp, "%.2f\n", arr[i].valorUnitario);
+        fprintf(fp, "%d\n", arr[i].quantEstoque);
+        fprintf(fp, "%d\n", arr[i].quantVendida);
+    }
+
+    fclose(fp);
+}
+
+void salvarProdutosVendidos(struct produto *arr, int tam) {
+
+    char filename[40];
+
+    struct tm *timenow;
+
+    time_t now = time(NULL);
+    timenow = gmtime(&now);
+
+    strftime(filename, sizeof(filename), "%Y-%m-%d_%H-%M-%S.txt", timenow);
+
+    FILE *fp = fopen(filename, "w");
+
+    if(fp == NULL) {
+        printf("Erro ao abrir o arquivo %s", filename);
+        return 1;
+    }
+
+    fprintf(fp, "produtos_vendidos\n");
 
     for(int i = 0; i < tam; i++) {
         fprintf(fp, "\n%d\n", arr[i].codigo);

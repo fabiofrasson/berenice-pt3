@@ -14,7 +14,8 @@ int main() {
     };
 
     // Chamada da função
-    salvarProdutos(array, 5);
+    salvarProdutosCadastrados(array, 5);
+    salvarProdutosVendidos(array, 5);
 
     return 0;
 }
