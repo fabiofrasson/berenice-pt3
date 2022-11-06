@@ -2,7 +2,6 @@
 *.txt
 *.xls
 *.xlsx
-*.csv
 
 # Prerequisites
 *.d

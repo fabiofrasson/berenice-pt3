@@ -30,10 +30,15 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="extern/libxlsxwriter-RELEASE_1.1.4/include" />
 		</Compiler>
+		<Linker>
+			<Add directory="extern/libxlsxwriter-RELEASE_1.1.4/lib" />
+		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="produto.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

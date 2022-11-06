@@ -1,21 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <locale.h>
 #include "produto.h" // Adição do header
 
 int main() {
 
+    setlocale(LC_ALL, "Portuguese");
+
     // Array para teste da função
-    struct produto array[5] = {
-        {1, "Produto 1", 5.0, 10, 1},
-        {2, "Produto 2", 6.69, 10, 7},
-        {3, "Produto 3", 10.5, 10, 9},
-        {4, "Produto 4", 8.79, 10, 5},
-        {5, "Produto 5", 325, 10, 3}
+    struct produto array[] = {
+        {18745, "Pão de Forma", 7.5, 10, 1},
+        {45462, "Pão de Centeio", 8.69, 10, 7},
+        {34654, "Broa de Milho", 5.0, 10, 9},
+        {40, "Sonho", 4.5, 10, 5},
+        {5000, "Tubaína", 3.25, 10, 3}
     };
 
     // Chamada da função
     salvarProdutosCadastrados(array, 5);
     salvarProdutosVendidos(array, 5);
+    exibirProdutos(array, 5, true);
 
     return 0;
 }
