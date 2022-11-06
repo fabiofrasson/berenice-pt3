@@ -94,18 +94,17 @@ void produtos(){
 }
 
 void exibir(){
-    
-    int produtocodigo1 "18745", produtocodigo2 "45462", produtocodigo3 "34654", produtocodigo4 "40", produtocodigo5 "5000";
-    char produtoOpcao1 "Pão de Fôrma", produtoOpcao2 "Pão de Centeio", produtoOpcao3 "Broa de Milho", produtoOpcao4 "Sonho", produtoOpcao5 "Tubaína";
-    float precoProduto1 7.50, precoProduto2 8.69, precoProduto3 5.0, precoProduto4 4.5, precoProduto5 3.25;
-    
+
+    int codigo[5] = {18475, 45462, 34654, 40, 5000};
+    float preco[5] = {7.50, 8.69, 5.00, 4.50, 3.25};
+
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\tItem(Código)\tNome do Item\tValor(Unidade)\tEstoque");
-    printf("\t\t\t\t1\t\t\t%s\t\tR$ %.2f\t\t\t%d\n", produtocodigo1, produtoOpcao1, precoProduto1); //estoqueItens[0]);
-    printf("\t\t\t\t2\t\t\t%s\t\tR$ %.2f\t\t\t%d\n", produtocodigo2, produtoOpcao2, precoProduto2); //estoqueItens[1]);
-    printf("\t\t\t\t3\t\t\t%s\t\tR$ %.2f\t\t\t%d\n", produtocodigo3, produtoOpcao3, precoProduto3); //estoqueItens[2]);
-    printf("\t\t\t\t4\t\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", produtocodigo4, produtoOpcao4, precoProduto4); //estoqueItens[3]);
-    printf("\t\t\t\t5\t\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", produtocodigo5, produtoOpcao5, precoProduto5); //estoqueItens[4]);
+    printf("\t\t\t\t%i\t\t\t%s\t\tR$%.2f\t\t\t%d\n", codigo[0], "Pão de Forma", preco[0]); //estoqueItens[0]);
+    printf("\t\t\t\t%i\t\t\t%s\t\tR$%.2f\t\t\t%d\n", codigo[1], "Pão de Centeio", preco[1]); //estoqueItens[1]);
+    printf("\t\t\t\t%i\t\t\t%s\t\tR$%.2f\t\t\t%d\n", codigo[2], "Broa de Milho", preco[2]); //estoqueItens[2]);
+    printf("\t\t\t\t%i\t\t\t%s\t\t\tR$%.2f\t\t\t%d\n", codigo[3], "Sonho", preco[3]); //estoqueItens[3]);
+    printf("\t\t\t\t%i\t\t\t%s\t\t\tR$%.2f\t\t\t%d\n", codigo[4], "Tubaína", preco[4]); //estoqueItens[4]);
     printf("---------------------------------------------------------------------------------------------\n");
 }
 
@@ -140,8 +139,8 @@ void sair(){
     return 0;
 }
 
-void limparTela()
-{
+void limparTela(){
+
 #ifdef __linux__
     system.("clear");
 #elif _WIN32
@@ -149,4 +148,5 @@ void limparTela()
 #else
 
 #endif
+
 }
