@@ -88,11 +88,6 @@ void produtos()
 
     while(opcaoprodutos != 1 && opcaoprodutos != 2 && opcaoprodutos != 3&& opcaoprodutos != 4 && opcaoprodutos != 5 && opcaoprodutos != 6 && opcaoprodutos != 7)
     {
-
-        limparTela();
-
-        produtos();
-
         printf("Erro: Opção inválida. Por favor, digite uma opção válida:\n");
         scanf("%d", &opcaoprodutos);
         getchar();
@@ -155,11 +150,6 @@ void submenuvendas()
 
     while(opcaovendas != 1 && opcaovendas != 2 && opcaovendas != 3)
     {
-
-        limparTela();
-
-        submenuvendas();
-
         printf("Erro: Opção inválida. Por favor, digite uma opção válida:\n");
         scanf("%d", &opcaovendas);
         getchar();
