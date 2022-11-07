@@ -17,8 +17,8 @@ int main() {
         {5000, "Tubaína", 3.25, 10, 3}
     };
 
-    //salvarProdutosCadastrados(array, 5);
-    //salvarProdutosVendidos(array, 5);
+    // salvarProdutosCadastrados(array, 5);
+    // salvarProdutosVendidos(array, 5);
 
     // Exibir produtos
     exibirProdutos(array, 5, false);

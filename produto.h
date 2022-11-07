@@ -82,11 +82,11 @@ void exibirProdutos(struct produto *arr, int tam, bool relatorio) {
     } else {
         printf("---------------------------------------------------------------------------------------------\n");
         printf("\t\tItem(Código)\tNome do Item\t\tValor(Unidade)\t\tEstoque\n");
-        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[0].codigo, arr[0].nomeProduto, arr[0].valorUnitario);
-        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[1].codigo, arr[1].nomeProduto, arr[1].valorUnitario);
-        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[2].codigo, arr[2].nomeProduto, arr[2].valorUnitario);
-        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[3].codigo, arr[3].nomeProduto, arr[3].valorUnitario);
-        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[4].codigo, arr[4].nomeProduto, arr[4].valorUnitario);
+        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[0].codigo, arr[0].nomeProduto, arr[0].valorUnitario, arr[0].quantEstoque);
+        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[1].codigo, arr[1].nomeProduto, arr[1].valorUnitario, arr[1].quantEstoque);
+        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[2].codigo, arr[2].nomeProduto, arr[2].valorUnitario, arr[2].quantEstoque);
+        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[3].codigo, arr[3].nomeProduto, arr[3].valorUnitario, arr[3].quantEstoque);
+        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[4].codigo, arr[4].nomeProduto, arr[4].valorUnitario, arr[4].quantEstoque);
         printf("---------------------------------------------------------------------------------------------\n");
     }
 }
