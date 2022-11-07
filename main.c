@@ -3,9 +3,14 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct cadastro{
-    char nome[20];
+typedef struct cadastro
+{
+    char nome[25];
     int quantidade;
+    int codigo;
+    int quantEstoque;
+    float valorUnitario;
+
 } cadastro; //faltava agora o completar do typedef
 
 cadastro *p = NULL;
@@ -21,37 +26,43 @@ void deletar();
 
 int main() // Início do bloco de código
 {
-    do{
+    do
+    {
         menu();
 
         printf("\tOpcao: ");
         scanf("%d",&opcao);
-        fflush(stdin);
 
-            switch(opcao){
-                case 0:
-                    break;
+        switch(opcao)
+        {
+        case 0:
+            break;
 
-                case 1:{
-                    do{
-                        cadastra();
-                        printf("Deseja cadastrar mais (s/n): "); scanf(" %c", &op); //Cadastro de produtos
+        case 1:
+        {
+            do
+            {
+                cadastra();
+                printf("Deseja cadastrar mais (s/n): "); //Cadastro de produtos
+                scanf(" %c", &op);
 
-                    }while(toupper(op)!='N');
-                    break;
-                }
-
-                case 2:
-                    exibe();
-                    break;
-                case 3:
-                    deletar();
-                    break;
-
-                default:
-                    printf("Opcao invalida.\n\n");
             }
-    }while(opcao!=0);
+            while (op =='s' || op == 'S');
+            break;
+        }
+
+        case 2:
+            exibe();
+            break;
+        case 3:
+            deletar();
+            break;
+
+        default:
+            printf("Opcao invalida.\n\n");
+        }
+    }
+    while(opcao!=0);
 
     //getchar();
 
@@ -66,40 +77,52 @@ void menu()
 
 void cadastra()
 {
-    if(p == NULL){
+    if(p == NULL)
+    {
         printf("Numero de cadastros: ");
         scanf("%d",&num);
 
         p = (cadastro *)calloc(num, sizeof(cadastro));
 
         int i;
-        for(i=0; i<num; i++){
+        for(i=0; i<num; i++)
+        {
             printf("Cadastro %d\n",i+1);
-            printf("Nome: "); scanf("%s", p[i].nome);
-            printf("Quantidade: "); scanf("%d",&p[i].quantidade);fflush(stdin);
+            printf("Nome: ");
+            scanf("%s", p[i].nome);
+            printf("Quantidade: ");
+            scanf("%d",&p[i].quantidade);
             printf("\n\n");
 
         }
-    }else{
+    }
+    else
+    {
 
         num_velho = num++;
         p = realloc(p,num);
         printf("Cadastro %d\n",num_velho);
-        printf("Nome: "); scanf("%s",p[num_velho].nome);
-        printf("Quantidade: "); scanf("%d",&p[num_velho].quantidade);fflush(stdin);
+        printf("Nome: ");
+        scanf("%s",p[num_velho].nome);
+        printf("Quantidade: ");
+        scanf("%d",&p[num_velho].quantidade);
+
 
     }
 }
 
-void deletar(){
-    printf("Qual a posição a excluir?");
+void deletar()
+{
+    printf("Qual a posicao a excluir?");
     int pos;
     scanf("%d", &pos);
     pos-- ; //para ajustar aos indices que começam em 0
 
-    if (pos >= 0 && pos < num){ //se a posição é valida
+    if (pos >= 0 && pos < num)  //se a posição é valida
+    {
         int i;
-        for (i = pos;i < num - 1; ++i){
+        for (i = pos; i < num - 1; ++i)
+        {
             p[i] = p[i + 1];
         }
 
@@ -114,11 +137,13 @@ void exibe()
         printf("\t -- Cadastro vazio. --\n\n");
 
 
-    else{
+    else
+    {
 
-        for(posicao=0; posicao<num;posicao++){
+        for(posicao=0; posicao<num; posicao++)
+        {
 
-            printf("Posição %d\n\n", posicao); //faltava o j aqui
+            printf("Posicao %d\n\n", posicao); //faltava o j aqui
             printf("Nome: %s\n",p[posicao].nome);
             printf("Quantidade: %d",p[posicao].quantidade);
             puts("\n\n");
