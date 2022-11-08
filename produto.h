@@ -52,15 +52,7 @@ int vendaProdutos() {
         getchar();
         counter++;
     }
-
-    if(opcao == 1) {
-        realizarVenda();
-    } else if(opcao == 2) {
-        printf("Opcao correta!");
-        return 0;
-    } else {
-        // Chamar o menu principal
-    }
+    return opcao;
 }
 
 void imprimeOpcoesSubmenuVendas() {
@@ -69,8 +61,40 @@ void imprimeOpcoesSubmenuVendas() {
     printf("3. Voltar\n\n");
 }
 
-void realizarVenda() {
+void realizarVenda(struct produto *arr, int *tam) {
 
+    int codigoProduto, quantidade;
+
+    printf("Pos 0: %d\n", arr[0].quantEstoque);
+    printf("Pos 1: %d\n", arr[1].quantEstoque);
+    printf("Pos 2: %d\n", arr[2].quantEstoque);
+    printf("Pos 3: %d\n", arr[3].quantEstoque);
+    printf("Pos 4: %d\n", arr[4].quantEstoque);
+
+    if(arr[0].quantEstoque == 0 && arr[1].quantEstoque == 0 && arr[2].quantEstoque == 0 && arr[3].quantEstoque == 0 && arr[4].quantEstoque == 0) {
+        printf("Não há itens disponíveis para venda, retornando ao menu principal.");
+        delay(1000);
+        return 0;
+        // Trabalhar retorno ao menu principal
+    }
+
+    printf("Digite o código do produto que deseja vender:\n");
+    exibirProdutos(&arr, &tam, true);
+    scanf("%d", &codigoProduto);
+
+    while(codigoProduto != arr[0].codigo && codigoProduto != arr[1].codigo && codigoProduto != arr[2].codigo && codigoProduto != arr[3].codigo && codigoProduto != arr[4].codigo) {
+        printf("Codigo invalido, digite um codigo valido.\n");
+        exibirProdutos(&arr, &tam, true);
+        scanf("%d", &codigoProduto);
+    }
+
+    printf("Agora, digite a quantidade:\n");
+    scanf("%d", &quantidade);
+
+    while(quantidade <= 0) {
+        printf("Quantidade invalida, digite uma quantidade acima de zero:\n");
+        scanf("%d", &quantidade);
+    }
 }
 
 void salvarProdutosVendidos(struct produto *arr, int tam) {
@@ -121,8 +145,8 @@ void exibirProdutos(struct produto *arr, int tam, bool relatorio) {
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[0].codigo, arr[0].nomeProduto, arr[0].valorUnitario, arr[0].quantEstoque);
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[1].codigo, arr[1].nomeProduto, arr[1].valorUnitario, arr[1].quantEstoque);
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[2].codigo, arr[2].nomeProduto, arr[2].valorUnitario, arr[2].quantEstoque);
-        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[3].codigo, arr[3].nomeProduto, arr[3].valorUnitario, arr[3].quantEstoque);
-        printf("\t\t%d\t\t%s\t\t\tR$ %.2f\t\t\t%d\n", arr[4].codigo, arr[4].nomeProduto, arr[4].valorUnitario, arr[4].quantEstoque);
+        printf("\t\t%d\t\t%s\tR$ %.2f\t\t\t%d\n", arr[3].codigo, arr[3].nomeProduto, arr[3].valorUnitario, arr[3].quantEstoque);
+        printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[4].codigo, arr[4].nomeProduto, arr[4].valorUnitario, arr[4].quantEstoque);
         printf("---------------------------------------------------------------------------------------------\n");
     }
 }
