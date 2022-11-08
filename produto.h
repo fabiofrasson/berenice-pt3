@@ -2,6 +2,7 @@
 #define PRODUTO_H_INCLUDED
 #include <time.h>
 #include <stdbool.h>
+#include "geral.h"
 
 // Definição da struct
 typedef struct produto {
@@ -35,6 +36,41 @@ void salvarProdutosCadastrados(struct produto *arr, int tam) {
     }
 
     fclose(fp);
+}
+
+int vendaProdutos() {
+
+    int opcao = 0, counter = 0;
+
+    while (opcao != 1 && opcao != 2 && opcao != 3) {
+        if(counter > 0) {
+            printf("Opcao invalida.\n");
+            transicao(1000);
+        }
+        imprimeOpcoesSubmenuVendas();
+        scanf("%d", &opcao);
+        getchar();
+        counter++;
+    }
+
+    if(opcao == 1) {
+        realizarVenda();
+    } else if(opcao == 2) {
+        printf("Opcao correta!");
+        return 0;
+    } else {
+        // Chamar o menu principal
+    }
+}
+
+void imprimeOpcoesSubmenuVendas() {
+    printf("1. Realizar venda\n");
+    printf("2. Relatorio de vendas\n");
+    printf("3. Voltar\n\n");
+}
+
+void realizarVenda() {
+
 }
 
 void salvarProdutosVendidos(struct produto *arr, int tam) {
