@@ -9,8 +9,7 @@ typedef struct produto {
     int quantVendida;
 } produto;
 
-struct produto *p = NULL;
-int num, num_novo, num_velho, realoca = 0;
+int num, num_novo, num_velho, realoca;
 int opcao; //opcao deve ser inteiro se é utlizado como tal
 char op;
 

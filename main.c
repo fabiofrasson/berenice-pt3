@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-
 // Adição dos headers
 #include "header.h"
 #include "produto.h"

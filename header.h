@@ -14,12 +14,12 @@ void salvarProdutosVendidos(struct produto *arr, int tam);
 void exibirProdutos(struct produto *arr, int tam, bool relatorio);
 void menu();
 void produtos();
-void sair();
+int sair();
 void limparTela();
 void exibir();
 void submenuvendas();
 int escolherItemMenu();
-void cadastra();
-void deletar();
+//void cadastra();
+//void deletar();
 
 #endif // HEADER_H_INCLUDED

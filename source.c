@@ -1,11 +1,11 @@
 #include <stdbool.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include "header.h"
 #include "produto.h"
 
-void delay(int milliseconds)
-{
+void delay(int milliseconds) {
     long pause;
     clock_t now,then;
 
@@ -15,14 +15,12 @@ void delay(int milliseconds)
         now = clock();
 }
 
-void transicao(int milisegundos)
-{
+void transicao(int milisegundos) {
     delay(milisegundos);
     limparTela();
 }
 
-void limparTela()
-{
+void limparTela() {
 #ifdef linux
     system("clear");
 #elif _WIN32
@@ -169,8 +167,7 @@ void exibirProdutos(struct produto *arr, int tam, bool relatorio) {
     }
 }
 
-void menu()
-{
+void menu() {
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\t\tBem-Vindo ao Mercado da Berenice\n\n");
     printf("\t\t\tSelecione um dos números referentes a operação\n");
@@ -181,8 +178,7 @@ void menu()
 
     int opcaoMenu = escolherItemMenu();
 
-    switch(opcaoMenu)
-    {
+    switch(opcaoMenu) {
     case 1:
         limparTela();
         produtos();
@@ -198,15 +194,13 @@ void menu()
     }
 }
 
-int escolherItemMenu()
-{
+int escolherItemMenu() {
     int resposta = 0;
 
     printf("\nSelecione um código do menu acima para interagir com o sistema:\n");
     scanf("%d", &resposta);
 
-    while(resposta != 1 && resposta != 2 && resposta != 3)
-    {
+    while(resposta != 1 && resposta != 2 && resposta != 3) {
         limparTela();
 
         menu();
@@ -217,8 +211,7 @@ int escolherItemMenu()
     return resposta;
 }
 
-void produtos()
-{
+void produtos() {
     int opcaoprodutos;
 
     printf("---------------------------------------------------------------------------------------------\n");
@@ -235,14 +228,12 @@ void produtos()
     scanf("%d", &opcaoprodutos);
     getchar();
 
-    while(opcaoprodutos != 1 && opcaoprodutos != 2 && opcaoprodutos != 3&& opcaoprodutos != 4 && opcaoprodutos != 5 && opcaoprodutos != 6 && opcaoprodutos != 7)
-    {
+    while(opcaoprodutos != 1 && opcaoprodutos != 2 && opcaoprodutos != 3&& opcaoprodutos != 4 && opcaoprodutos != 5 && opcaoprodutos != 6 && opcaoprodutos != 7) {
         printf("Erro: Opção inválida. Por favor, digite uma opção válida:\n");
         scanf("%d", &opcaoprodutos);
         getchar();
     }
-    switch(opcaoprodutos)
-    {
+    switch(opcaoprodutos) {
     case 1:
         limparTela();
         exibir();
@@ -266,8 +257,7 @@ void produtos()
     }
 }
 
-void exibir()
-{
+void exibir() {
     int voltar;
     int codigo[5] = {18475, 45462, 34654, 40, 5000};
     float preco[5] = {7.50, 8.69, 5.00, 4.50, 3.25};
@@ -285,8 +275,7 @@ void exibir()
     getchar();
 }
 
-void submenuvendas()
-{
+void submenuvendas() {
     limparTela();
     int opcaovendas;
     printf("\t\t\tSelecione um dos números referentes a operação\n");
@@ -297,15 +286,13 @@ void submenuvendas()
     scanf("%d", &opcaovendas);
     getchar();
 
-    while(opcaovendas != 1 && opcaovendas != 2 && opcaovendas != 3)
-    {
+    while(opcaovendas != 1 && opcaovendas != 2 && opcaovendas != 3) {
         printf("Erro: Opção inválida. Por favor, digite uma opção válida:\n");
         scanf("%d", &opcaovendas);
         getchar();
     }
 
-    switch(opcaovendas)
-    {
+    switch(opcaovendas) {
     case 1:
         break;
     case 2:
@@ -316,62 +303,51 @@ void submenuvendas()
     }
 }
 
-void cadastra()
-{
-    if(p == NULL)
-    {
+/*
+void cadastra() {
+    if(p == NULL) {
         printf("Numero de produtos: ");
         scanf("%d",&num);
 
         p = (produto *)calloc(num, sizeof(produto));
 
         int i;
-        for(i=0; i<num; i++)
-        {
+        for(i=0; i<num; i++) {
             printf("produto %d\n",i+1);
             printf("Nome: ");
             scanf("%s", p[i].nomeProduto);
             printf("Quantidade: ");
-            scanf("%d",&p[i].quantEstoque);
+            scanf("%d",p[i].quantEstoque);
             printf("\n\n");
 
         }
-    }
-    else
-    {
-
+    } else {
         num_velho = num++;
         p = realloc(p,num);
         printf("produto %d\n",num_velho);
         printf("Nome: ");
-        scanf("%s",p[num_velho].nomeProduto);
+        scanf("%s", p[num_velho].nomeProduto);
         printf("Quantidade: ");
-        scanf("%d",&p[num_velho].quantEstoque);
-
-
+        scanf("%d", p[num_velho].quantEstoque);
     }
 }
 
-void deletar()
-{
+void deletar() {
     printf("Qual a posicao a excluir?");
     int pos;
     scanf("%d", &pos);
-    pos-- ; //para ajustar aos indices que começam em 0
+    pos-- ; //para ajustar os indices que começam em 0
 
-    if (pos >= 0 && pos < num)  //se a posição é valida
-    {
+    if (pos >= 0 && pos < num) { //se a posição é valida
         int i;
-        for (i = pos; i < num - 1; ++i)
-        {
+        for (i = pos; i < num - 1; ++i) {
             p[i] = p[i + 1];
         }
-
         p = realloc(p, --num * sizeof(produto));
     }
 }
+*/
 
-void sair()
-{
+int sair() {
     return 0;
 }
