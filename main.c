@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <locale.h>
-#include "produto.h" // Adição do header
-#include "geral.h"
+
+// Adição dos headers
+#include "header.h"
+#include "produto.h"
 
 int main() {
-
     setlocale(LC_ALL, "Portuguese");
+    /*
 
     struct produto *produtos = (produto)*malloc(sizeof(produto*));
 
@@ -21,7 +22,7 @@ int main() {
     };
     int tam = 5;
 
-    struct produto *produtos = arrayProdutos;
+    produtos = arrayProdutos;
     int *tamanhoArray = &tam;
 
     // salvarProdutosCadastrados(array, 5);
@@ -43,6 +44,7 @@ int main() {
     } else {
         // Chamar o menu principal
     }
+    */
 
     return 0;
 }
