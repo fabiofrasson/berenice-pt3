@@ -8,6 +8,7 @@
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
+    menu();
     /*
 
     struct produto *produtos = (produto)*malloc(sizeof(produto*));
