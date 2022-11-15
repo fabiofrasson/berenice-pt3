@@ -5,7 +5,8 @@
 #include "header.h"
 #include "produto.h"
 
-void delay(int milliseconds) {
+void delay(int milliseconds)
+{
     long pause;
     clock_t now,then;
 
@@ -15,12 +16,14 @@ void delay(int milliseconds) {
         now = clock();
 }
 
-void transicao(int milisegundos) {
+void transicao(int milisegundos)
+{
     delay(milisegundos);
     limparTela();
 }
 
-void limparTela() {
+void limparTela()
+{
 #ifdef linux
     system("clear");
 #elif _WIN32
@@ -30,20 +33,23 @@ void limparTela() {
 #endif
 }
 
-void salvarProdutosCadastrados(struct produto *arr, int tam) {
+void salvarProdutosCadastrados(struct produto *arr, int tam)
+{
 
     char *filename = "produtos.txt";
 
     FILE *fp = fopen(filename, "w");
 
-    if(fp == NULL) {
+    if(fp == NULL)
+    {
         printf("Erro ao abrir o arquivo %s", filename);
-        return 1;
+        exit (1);
     }
 
     fprintf(fp, "quantidade_produtos\n");
 
-    for(int i = 0; i < tam; i++) {
+    for(int i = 0; i < tam; i++)
+    {
         fprintf(fp, "\n%d\n", arr[i].codigo);
         fprintf(fp, "%s\n", arr[i].nomeProduto);
         fprintf(fp, "%.2f\n", arr[i].valorUnitario);
@@ -54,12 +60,15 @@ void salvarProdutosCadastrados(struct produto *arr, int tam) {
     fclose(fp);
 }
 
-int vendaProdutos() {
+int vendaProdutos()
+{
 
     int opcao = 0, counter = 0;
 
-    while (opcao != 1 && opcao != 2 && opcao != 3) {
-        if(counter > 0) {
+    while (opcao != 1 && opcao != 2 && opcao != 3)
+    {
+        if(counter > 0)
+        {
             printf("Opcao invalida.\n");
             transicao(1000);
         }
@@ -71,13 +80,15 @@ int vendaProdutos() {
     return opcao;
 }
 
-void imprimeOpcoesSubmenuVendas() {
+void imprimeOpcoesSubmenuVendas()
+{
     printf("1. Realizar venda\n");
     printf("2. Relatorio de vendas\n");
     printf("3. Voltar\n\n");
 }
 
-void realizarVenda(struct produto *arr, int *tam) {
+void realizarVenda(struct produto *arr, int *tam)
+{
 
     int codigoProduto, quantidade;
 
@@ -87,18 +98,20 @@ void realizarVenda(struct produto *arr, int *tam) {
     printf("Pos 3: %d\n", arr[3].quantEstoque);
     printf("Pos 4: %d\n", arr[4].quantEstoque);
 
-    if(arr[0].quantEstoque == 0 && arr[1].quantEstoque == 0 && arr[2].quantEstoque == 0 && arr[3].quantEstoque == 0 && arr[4].quantEstoque == 0) {
-        printf("N„o h· itens disponÌveis para venda, retornando ao menu principal.");
+    if(arr[0].quantEstoque == 0 && arr[1].quantEstoque == 0 && arr[2].quantEstoque == 0 && arr[3].quantEstoque == 0 && arr[4].quantEstoque == 0)
+    {
+        printf("N√£o h√° itens dispon√≠veis para venda, retornando ao menu principal.");
         delay(1000);
         return 0;
         // Trabalhar retorno ao menu principal
     }
 
-    printf("Digite o cÛdigo do produto que deseja vender:\n");
+    printf("Digite o c√≥digo do produto que deseja vender:\n");
     exibirProdutos(&arr, &tam, true);
     scanf("%d", &codigoProduto);
 
-    while(codigoProduto != arr[0].codigo && codigoProduto != arr[1].codigo && codigoProduto != arr[2].codigo && codigoProduto != arr[3].codigo && codigoProduto != arr[4].codigo) {
+    while(codigoProduto != arr[0].codigo && codigoProduto != arr[1].codigo && codigoProduto != arr[2].codigo && codigoProduto != arr[3].codigo && codigoProduto != arr[4].codigo)
+    {
         printf("Codigo invalido, digite um codigo valido.\n");
         exibirProdutos(&arr, &tam, true);
         scanf("%d", &codigoProduto);
@@ -107,13 +120,15 @@ void realizarVenda(struct produto *arr, int *tam) {
     printf("Agora, digite a quantidade:\n");
     scanf("%d", &quantidade);
 
-    while(quantidade <= 0) {
+    while(quantidade <= 0)
+    {
         printf("Quantidade invalida, digite uma quantidade acima de zero:\n");
         scanf("%d", &quantidade);
     }
 }
 
-void salvarProdutosVendidos(struct produto *arr, int tam) {
+void salvarProdutosVendidos(struct produto *arr, int tam)
+{
 
     char filename[40];
 
@@ -126,14 +141,16 @@ void salvarProdutosVendidos(struct produto *arr, int tam) {
 
     FILE *fp = fopen(filename, "w");
 
-    if(fp == NULL) {
+    if(fp == NULL)
+    {
         printf("Erro ao abrir o arquivo %s", filename);
         return 1;
     }
 
     fprintf(fp, "produtos_vendidos\n");
 
-    for(int i = 0; i < tam; i++) {
+    for(int i = 0; i < tam; i++)
+    {
         fprintf(fp, "\n%d\n", arr[i].codigo);
         fprintf(fp, "%s\n", arr[i].nomeProduto);
         fprintf(fp, "%.2f\n", arr[i].valorUnitario);
@@ -144,20 +161,24 @@ void salvarProdutosVendidos(struct produto *arr, int tam) {
     fclose(fp);
 }
 
-void exibirProdutos(struct produto *arr, int tam, bool relatorio) {
+void exibirProdutos(struct produto *arr, int tam, bool relatorio)
+{
 
-    if(relatorio == true) {
+    if(relatorio == true)
+    {
         printf("---------------------------------------------------------------------------------------------\n");
-        printf("\t\tItem(CÛdigo)\tProduto\t\tEstoque\t\tVendidos\tTotal\n");
+        printf("\t\tItem(C√≥digo)\tProduto\t\tEstoque\t\tVendidos\tTotal\n");
         printf("\t\t%d\t\t%s\t%d\t\t%d\t\tR$ %.2f\n", arr[0].codigo, arr[0].nomeProduto, arr[0].quantEstoque, arr[0].quantVendida, (arr[0].valorUnitario * arr[0].quantVendida));
         printf("\t\t%d\t\t%s\t%d\t\t%d\t\tR$ %.2f\n", arr[1].codigo, arr[1].nomeProduto, arr[1].quantEstoque, arr[1].quantVendida, (arr[1].valorUnitario * arr[1].quantVendida));
         printf("\t\t%d\t\t%s\t%d\t\t%d\t\tR$ %.2f\n", arr[2].codigo, arr[2].nomeProduto, arr[2].quantEstoque, arr[2].quantVendida, (arr[2].valorUnitario * arr[2].quantVendida));
         printf("\t\t%d\t\t%s\t\t%d\t\t%d\t\tR$ %.2f\n", arr[3].codigo, arr[3].nomeProduto, arr[3].quantEstoque, arr[3].quantVendida, (arr[3].valorUnitario * arr[3].quantVendida));
         printf("\t\t%d\t\t%s\t\t%d\t\t%d\t\tR$ %.2f\n", arr[4].codigo, arr[4].nomeProduto, arr[4].quantEstoque, arr[4].quantVendida, (arr[4].valorUnitario * arr[4].quantVendida));
         printf("---------------------------------------------------------------------------------------------\n");
-    } else {
+    }
+    else
+    {
         printf("---------------------------------------------------------------------------------------------\n");
-        printf("\t\tItem(CÛdigo)\tNome do Item\t\tValor(Unidade)\t\tEstoque\n");
+        printf("\t\tItem(C√≥digo)\tNome do Item\t\tValor(Unidade)\t\tEstoque\n");
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[0].codigo, arr[0].nomeProduto, arr[0].valorUnitario, arr[0].quantEstoque);
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[1].codigo, arr[1].nomeProduto, arr[1].valorUnitario, arr[1].quantEstoque);
         printf("\t\t%d\t\t%s\t\tR$ %.2f\t\t\t%d\n", arr[2].codigo, arr[2].nomeProduto, arr[2].valorUnitario, arr[2].quantEstoque);
@@ -167,10 +188,11 @@ void exibirProdutos(struct produto *arr, int tam, bool relatorio) {
     }
 }
 
-void menu() {
+void menu()
+{
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\t\tBem-Vindo ao Mercado da Berenice\n\n");
-    printf("\t\t\tSelecione um dos n˙meros referentes a operaÁ„o\n");
+    printf("\t\t\tSelecione um dos n√∫meros referentes a opera√ß√£o\n");
     printf("\t\t\t1- Produtos\n");
     printf("\t\t\t2- Vendas\n");
     printf("\t\t\t3- Sair\n");
@@ -178,7 +200,8 @@ void menu() {
 
     int opcaoMenu = escolherItemMenu();
 
-    switch(opcaoMenu) {
+    switch(opcaoMenu)
+    {
     case 1:
         limparTela();
         produtos();
@@ -194,29 +217,32 @@ void menu() {
     }
 }
 
-int escolherItemMenu() {
+int escolherItemMenu()
+{
     int resposta = 0;
 
-    printf("\nSelecione um cÛdigo do menu acima para interagir com o sistema:\n");
+    printf("\nSelecione um c√≥digo do menu acima para interagir com o sistema:\n");
     scanf("%d", &resposta);
 
-    while(resposta != 1 && resposta != 2 && resposta != 3) {
+    while(resposta != 1 && resposta != 2 && resposta != 3)
+    {
         limparTela();
 
         menu();
 
-        printf("Erro: OpÁ„o inv·lida. Por favor, digite uma opÁ„o v·lida:\n");
+        printf("Erro: Op√ß√£o inv√°lida. Por favor, digite uma op√ß√£o v√°lida:\n");
         scanf("%d", &resposta);
     }
     return resposta;
 }
 
-void produtos() {
+void produtos()
+{
     int opcaoprodutos;
 
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\tProdutos\n\n");
-    printf("\t\tSelecione um dos n˙meros referentes a operaÁ„o\n");
+    printf("\t\tSelecione um dos n√∫meros referentes a opera√ß√£o\n");
     printf("\t\t1- Exibir\n");
     printf("\t\t2- Cadastrar\n");
     printf("\t\t3- Atualizar\n");
@@ -228,12 +254,14 @@ void produtos() {
     scanf("%d", &opcaoprodutos);
     getchar();
 
-    while(opcaoprodutos != 1 && opcaoprodutos != 2 && opcaoprodutos != 3&& opcaoprodutos != 4 && opcaoprodutos != 5 && opcaoprodutos != 6 && opcaoprodutos != 7) {
-        printf("Erro: OpÁ„o inv·lida. Por favor, digite uma opÁ„o v·lida:\n");
+    while(opcaoprodutos != 1 && opcaoprodutos != 2 && opcaoprodutos != 3&& opcaoprodutos != 4 && opcaoprodutos != 5 && opcaoprodutos != 6 && opcaoprodutos != 7)
+    {
+        printf("Erro: Op√ß√£o inv√°lida. Por favor, digite uma op√ß√£o v√°lida:\n");
         scanf("%d", &opcaoprodutos);
         getchar();
     }
-    switch(opcaoprodutos) {
+    switch(opcaoprodutos)
+    {
     case 1:
         limparTela();
         exibir();
@@ -241,10 +269,14 @@ void produtos() {
         produtos();
         break;
     case 2:
+        limparTela();
+        cadastra();
         break;
     case 3:
         break;
     case 4:
+        limparTela();
+        deletar();
         break;
     case 5:
         break;
@@ -257,42 +289,46 @@ void produtos() {
     }
 }
 
-void exibir() {
+void exibir()
+{
     int voltar;
     int codigo[5] = {18475, 45462, 34654, 40, 5000};
     float preco[5] = {7.50, 8.69, 5.00, 4.50, 3.25};
 
     printf("---------------------------------------------------------------------------------------------\n");
-    printf("\t\tItem(CÛdigo)\tNome do Item\tValor(Unidade)\tEstoque\n");
-    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[0], "P„o de Forma", preco[0]); //estoqueItens[0]);
-    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[1], "P„o de Centeio", preco[1]); //estoqueItens[1]);
+    printf("\t\tItem(C√≥digo)\tNome do Item\tValor(Unidade)\tEstoque\n");
+    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[0], "P√£o de Forma", preco[0]); //estoqueItens[0]);
+    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[1], "P√£o de Centeio", preco[1]); //estoqueItens[1]);
     printf("\t\t\%i\t\t%s\tR$%.2f\t\t%d\n", codigo[2], "Broa de Milho", preco[2]); //estoqueItens[2]);
     printf("\t\t%i\t\t%s\t\tR$%.2f\t\t%d\n", codigo[3], "Sonho", preco[3]); //estoqueItens[3]);
-    printf("\t\t%i\t\t%s\t\tR$%.2f\t\t%d\n", codigo[4], "TubaÌna", preco[4]); //estoqueItens[4]);
+    printf("\t\t%i\t\t%s\t\tR$%.2f\t\t%d\n", codigo[4], "Tuba√≠na", preco[4]); //estoqueItens[4]);
     printf("---------------------------------------------------------------------------------------------\n");
-    printf("Digite um n˙mero qualquer para voltar para o menu\n");
+    printf("Digite um n√∫mero qualquer para voltar para o menu\n");
     scanf("%d", &voltar);
     getchar();
 }
 
-void submenuvendas() {
+void submenuvendas()
+{
     limparTela();
     int opcaovendas;
-    printf("\t\t\tSelecione um dos n˙meros referentes a operaÁ„o\n");
+    printf("\t\t\tSelecione um dos n√∫meros referentes a opera√ß√£o\n");
     printf("\t\t\t1- Realizar venda\n");
-    printf("\t\t\t2- RelatÛrio de Vendas\n");
+    printf("\t\t\t2- Relat√≥rio de Vendas\n");
     printf("\t\t\t3- Voltar\n");
     printf("---------------------------------------------------------------------------------------------\n");
     scanf("%d", &opcaovendas);
     getchar();
 
-    while(opcaovendas != 1 && opcaovendas != 2 && opcaovendas != 3) {
-        printf("Erro: OpÁ„o inv·lida. Por favor, digite uma opÁ„o v·lida:\n");
+    while(opcaovendas != 1 && opcaovendas != 2 && opcaovendas != 3)
+    {
+        printf("Erro: Op√ß√£o inv√°lida. Por favor, digite uma op√ß√£o v√°lida:\n");
         scanf("%d", &opcaovendas);
         getchar();
     }
 
-    switch(opcaovendas) {
+    switch(opcaovendas)
+    {
     case 1:
         break;
     case 2:
@@ -303,25 +339,36 @@ void submenuvendas() {
     }
 }
 
-/*
-void cadastra() {
-    if(p == NULL) {
+
+void cadastra()
+{
+    produto produtos;
+    produto *p;
+
+    p = &produtos;
+
+    if(p == NULL)
+    {
         printf("Numero de produtos: ");
         scanf("%d",&num);
-
+        //Solicita ao usuario o tamanho que ele quer que tenha alocado na mem√≥ria para armarzenar os caracteres
         p = (produto *)calloc(num, sizeof(produto));
 
         int i;
-        for(i=0; i<num; i++) {
+        //Enquanto i for menor que zero e i menor que a quantidade de produtos a ser cadastrados, ser√° cadastrado +1 produto
+        for(i=0; i<num; i++)
+        {
             printf("produto %d\n",i+1);
-            printf("Nome: ");
-            scanf("%s", p[i].nomeProduto);
+            printf("Nome: %p/t");
+            scanf("%s",p[i].nomeProduto);//ponteiro aponta pra quantidade de cadastros a ser alocadae no nome produto
             printf("Quantidade: ");
-            scanf("%d",p[i].quantEstoque);
+            scanf("%d",p[i].quantEstoque);//ponteiro aponta pra quantidade de cadastros a ser alocada na quantidade de estoque
             printf("\n\n");
 
         }
-    } else {
+    }
+    else
+    {
         num_velho = num++;
         p = realloc(p,num);
         printf("produto %d\n",num_velho);
@@ -332,22 +379,27 @@ void cadastra() {
     }
 }
 
-void deletar() {
+void deletar()
+{
+    int *p;
     printf("Qual a posicao a excluir?");
     int pos;
     scanf("%d", &pos);
-    pos-- ; //para ajustar os indices que comeÁam em 0
+    pos-- ; //para ajustar os indices que come√ßam em 0
 
-    if (pos >= 0 && pos < num) { //se a posiÁ„o È valida
+    if (pos >= 0 && pos < num)   //se a posi√ß√£o √© valida
+    {
         int i;
-        for (i = pos; i < num - 1; ++i) {
+        for (i = pos; i < num - 1; ++i)
+        {
             p[i] = p[i + 1];
         }
         p = realloc(p, --num * sizeof(produto));
     }
 }
-*/
 
-int sair() {
+
+int sair()
+{
     return 0;
 }
