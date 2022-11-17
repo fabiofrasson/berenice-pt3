@@ -9,8 +9,10 @@ typedef struct produto {
     int quantVendida;
 } produto;
 
+produto *p;
+
 int num, num_novo, num_velho, realoca;
-int opcao; //opcao deve ser inteiro se é utlizado como tal
-char op;
+int opcao; //opcao deve ser inteiro se ï¿½ utlizado como tal
+
 
 #endif // PRODUTO_H_INCLUDED

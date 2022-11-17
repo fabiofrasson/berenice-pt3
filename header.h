@@ -19,7 +19,7 @@ void limparTela();
 void exibir();
 void submenuvendas();
 int escolherItemMenu();
-//void cadastra();
-//void deletar();
+void cadastra();
+void deletar();
 
 #endif // HEADER_H_INCLUDED

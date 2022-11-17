@@ -38,7 +38,7 @@ void salvarProdutosCadastrados(struct produto *arr, int tam) {
 
     if(fp == NULL) {
         printf("Erro ao abrir o arquivo %s", filename);
-        return 1;
+        exit (1);
     }
 
     fprintf(fp, "quantidade_produtos\n");
@@ -241,10 +241,14 @@ void produtos() {
         produtos();
         break;
     case 2:
+        limparTela();
+        cadastra();
         break;
     case 3:
         break;
     case 4:
+        limparTela();
+        deletar();
         break;
     case 5:
         break;
@@ -303,36 +307,74 @@ void submenuvendas() {
     }
 }
 
-/*
 void cadastra() {
-    if(p == NULL) {
-        printf("Numero de produtos: ");
+    //Solicita ao usuario o tamanho que ele quer que tenha alocado na memória para armarzenar os caracteres
+    printf("Numero de produtos: ");
+    scanf("%d",&num);
+    getchar();
+    printf("\n");
+
+    while(num <= 0) {
+        printf("\nQuantidade invalida. Digite um numero maior que zero: ");
         scanf("%d",&num);
-
-        p = (produto *)calloc(num, sizeof(produto));
-
-        int i;
-        for(i=0; i<num; i++) {
-            printf("produto %d\n",i+1);
-            printf("Nome: ");
-            scanf("%s", p[i].nomeProduto);
-            printf("Quantidade: ");
-            scanf("%d",p[i].quantEstoque);
-            printf("\n\n");
-
-        }
-    } else {
-        num_velho = num++;
-        p = realloc(p,num);
-        printf("produto %d\n",num_velho);
-        printf("Nome: ");
-        scanf("%s", p[num_velho].nomeProduto);
-        printf("Quantidade: ");
-        scanf("%d", p[num_velho].quantEstoque);
+        getchar();
+        printf("\n");
     }
+
+    produto produtosArr[num];
+    p = (produto *)calloc(num, sizeof(produto));
+    p = &produtosArr[0];
+    int nmRep;
+
+    //Enquanto i for menor que zero e i menor que a quantidade de produtos a ser cadastrados, será cadastrado +1 produto
+    for(int i = 0; i < num; i++) {
+        printf("Produto %d\n", (i+1));
+
+        // Add validação
+        printf("Codigo do produto: ");
+        scanf("%d",&p[i].codigo);
+        getchar();
+
+        while(p[i].codigo <= 0) {
+            printf("Codigo invalido, digitar um codigo unico e maior que zero: ");
+            scanf("%d",&p[i].codigo);
+            getchar();
+        }
+
+        // Add validação
+        printf("Nome: ");
+        gets(&p[i].nomeProduto);//ponteiro aponta pra quantidade de cadastros a ser alocadae no nome produto
+
+        // Não precisa de validação
+        printf("Valor unitario: R$ ");
+        scanf("%f",&p[i].valorUnitario);
+        getchar();
+
+        while(p[i].valorUnitario <= 0) {
+            printf("Valor invalido, digitar um valor maior que zero: ");
+            scanf("%d",&p[i].valorUnitario);
+            getchar();
+        }
+
+        printf("Quantidade: ");
+        scanf("%d",&p[i].quantEstoque);//ponteiro aponta pra quantidade de cadastros a ser alocada na quantidade de estoque
+        getchar();
+
+        while(p[i].quantEstoque <= 0) {
+            printf("Quantidade de estoque invalida, digitar um numero maior que zero: ");
+            scanf("%d",&p[i].quantEstoque);
+            getchar();
+        }
+
+        printf("\n");
+    }
+    printf("Todos os produtos foram cadastrados, retornando ao menu principal.\n");
+    transicao(1000);
+    menu();
 }
 
 void deletar() {
+    int *p;
     printf("Qual a posicao a excluir?");
     int pos;
     scanf("%d", &pos);
@@ -346,7 +388,7 @@ void deletar() {
         p = realloc(p, --num * sizeof(produto));
     }
 }
-*/
+
 
 int sair() {
     return 0;

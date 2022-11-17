@@ -35,11 +35,14 @@
 		<Linker>
 			<Add directory="extern/libxlsxwriter-RELEASE_1.1.4/lib" />
 		</Linker>
-		<Unit filename="geral.h" />
+		<Unit filename="header.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="produto.h" />
+		<Unit filename="source.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
