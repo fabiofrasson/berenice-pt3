@@ -324,6 +324,7 @@ void cadastra() {
     produto produtosArr[num];
     p = (produto *)calloc(num, sizeof(produto));
     p = &produtosArr[0];
+    numeroProdutos = &num;
     int nmRep;
 
     //Enquanto i for menor que zero e i menor que a quantidade de produtos a ser cadastrados, será cadastrado +1 produto
@@ -374,10 +375,18 @@ void cadastra() {
 }
 
 void deletar() {
-    int *p;
-    printf("Qual a posicao a excluir?");
+
+    printf("Codigo\t\tNome\t\tValor Unitario\t\tEstoque\n");
+    for(int i = 0; i < *numeroProdutos; i++) {
+        if(&p[i]) {
+            printf("%d\t\t%s\t\tR$ %.2f\t\t%d\n", p[i].codigo, p[i].nomeProduto, p[i].valorUnitario, p[i].quantEstoque);
+        }
+    }
+
+    printf("\nQual a posicao a excluir? ");
     int pos;
     scanf("%d", &pos);
+    getchar();
     pos-- ; //para ajustar os indices que começam em 0
 
     if (pos >= 0 && pos < num) { //se a posição é valida
@@ -387,6 +396,9 @@ void deletar() {
         }
         p = realloc(p, --num * sizeof(produto));
     }
+    printf("Produto da posicao %d excluido. Retornando ao menu principal.\n", pos);
+    transicao(1000);
+    menu();
 }
 
 

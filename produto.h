@@ -10,6 +10,7 @@ typedef struct produto {
 } produto;
 
 produto *p;
+int *numeroProdutos;
 
 int num, num_novo, num_velho, realoca;
 int opcao; //opcao deve ser inteiro se � utlizado como tal
