@@ -376,6 +376,8 @@ void cadastra() {
 
 void deletar() {
 
+    int pos;
+
     printf("Codigo\t\tNome\t\tValor Unitario\t\tEstoque\n");
     for(int i = 0; i < *numeroProdutos; i++) {
         if(&p[i]) {
@@ -383,20 +385,19 @@ void deletar() {
         }
     }
 
-    printf("\nQual a posicao a excluir? ");
-    int pos;
+    printf("\nDigite o codigo do produto a ser excluido: ");
     scanf("%d", &pos);
     getchar();
-    pos-- ; //para ajustar os indices que começam em 0
 
-    if (pos >= 0 && pos < num) { //se a posição é valida
-        int i;
-        for (i = pos; i < num - 1; ++i) {
-            p[i] = p[i + 1];
+    if (pos >= 0 && pos < num) {
+        for(int i = 0; i < num; i++) {
+            if(pos == p[i].codigo) {
+                free(p[i]);
+            }
         }
-        p = realloc(p, --num * sizeof(produto));
     }
-    printf("Produto da posicao %d excluido. Retornando ao menu principal.\n", pos);
+
+    printf("Produto de codigo %d excluido. Retornando ao menu principal.\n", pos);
     transicao(1000);
     menu();
 }
