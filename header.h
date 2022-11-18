@@ -11,7 +11,7 @@ int vendaProdutos();
 void imprimeOpcoesSubmenuVendas();
 void realizarVenda(struct produto *arr, int *tam);
 void salvarProdutosVendidos(struct produto *arr, int tam);
-void exibirProdutos(struct produto *arr, int tam, bool relatorio);
+void exibirProdutos(bool relatorio);
 void menu();
 void produtos();
 int sair();
