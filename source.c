@@ -30,28 +30,39 @@ void limparTela() {
 #endif
 }
 
-void salvarProdutosCadastrados(struct produto *arr, int tam) {
+void salvarProdutosCadastrados() {
+
+    if(p == NULL) {
+        limparTela();
+        printf("Nenhum produto foi cadastrado até o momento. Retornando ao menu principal.");
+        transicao(1000);
+        menu();
+    }
 
     char *filename = "produtos.txt";
 
     FILE *fp = fopen(filename, "w");
 
     if(fp == NULL) {
-        printf("Erro ao abrir o arquivo %s", filename);
-        exit (1);
+        printf("Erro ao abrir o arquivo %s. Retornando ao menu principal.", filename);
+        menu();
     }
 
-    fprintf(fp, "quantidade_produtos\n");
+    fprintf(fp, "%d\n", &numeroProdutos);
 
-    for(int i = 0; i < tam; i++) {
-        fprintf(fp, "\n%d\n", arr[i].codigo);
-        fprintf(fp, "%s\n", arr[i].nomeProduto);
-        fprintf(fp, "%.2f\n", arr[i].valorUnitario);
-        fprintf(fp, "%d\n", arr[i].quantEstoque);
-        fprintf(fp, "%d\n", arr[i].quantVendida);
+    for(int i = 0; i < &numeroProdutos; i++) {
+        fprintf(fp, "\n%d\n", &p[i].codigo);
+        fprintf(fp, "%s\n", &p[i].nomeProduto);
+        fprintf(fp, "%.2f\n", &p[i].valorUnitario);
+        fprintf(fp, "%d\n", &p[i].quantEstoque);
+        fprintf(fp, "%d\n", &p[i].quantVendida);
     }
 
     fclose(fp);
+
+    printf("Produtos salvos no arquivo %s com sucesso! Retornando ao menu principal.");
+    limparTela();
+    menu();
 }
 
 int vendaProdutos() {
@@ -60,7 +71,7 @@ int vendaProdutos() {
 
     while (opcao != 1 && opcao != 2 && opcao != 3) {
         if(counter > 0) {
-            printf("Opcao invalida.\n");
+            printf("Opção inválida.\n");
             transicao(1000);
         }
         imprimeOpcoesSubmenuVendas();
@@ -74,32 +85,31 @@ int vendaProdutos() {
 void imprimeOpcoesSubmenuVendas() {
     printf("---------------------------------------------------------------------------------------------\n");
     printf("1. Realizar venda\n");
-    printf("2. Relatorio de vendas\n");
+    printf("2. Relatório de vendas\n");
     printf("3. Voltar\n\n");
 }
 
-void realizarVenda(struct produto *arr, int *tam) {
+void realizarVenda() {
 
     int codigoProduto, quantidade;
 
-    printf("Pos 0: %d\n", arr[0].quantEstoque);
-    printf("Pos 1: %d\n", arr[1].quantEstoque);
-    printf("Pos 2: %d\n", arr[2].quantEstoque);
-    printf("Pos 3: %d\n", arr[3].quantEstoque);
-    printf("Pos 4: %d\n", arr[4].quantEstoque);
+    printf("Pos 0: %d\n", &p[0].quantEstoque);
+    printf("Pos 1: %d\n", &p[1].quantEstoque);
+    printf("Pos 2: %d\n", &p[2].quantEstoque);
+    printf("Pos 3: %d\n", &p[3].quantEstoque);
+    printf("Pos 4: %d\n", &p[4].quantEstoque);
 
-    if(arr[0].quantEstoque == 0 && arr[1].quantEstoque == 0 && arr[2].quantEstoque == 0 && arr[3].quantEstoque == 0 && arr[4].quantEstoque == 0) {
+    if(p[0].quantEstoque == 0 && p[1].quantEstoque == 0 && p[2].quantEstoque == 0 && p[3].quantEstoque == 0 && p[4].quantEstoque == 0) {
         printf("Não há itens disponíveis para venda, retornando ao menu principal.");
         delay(1000);
-        return 0;
-        // Trabalhar retorno ao menu principal
+        menu();
     }
 
     printf("Digite o código do produto que deseja vender:\n");
     exibirProdutos(true);
     scanf("%d", &codigoProduto);
 
-    while(codigoProduto != arr[0].codigo && codigoProduto != arr[1].codigo && codigoProduto != arr[2].codigo && codigoProduto != arr[3].codigo && codigoProduto != arr[4].codigo) {
+    while(codigoProduto != p[0].codigo && codigoProduto != p[1].codigo && codigoProduto != p[2].codigo && codigoProduto != p[3].codigo && codigoProduto != p[4].codigo) {
         printf("Codigo invalido, digite um codigo valido.\n");
         exibirProdutos(true);
         scanf("%d", &codigoProduto);
@@ -114,7 +124,7 @@ void realizarVenda(struct produto *arr, int *tam) {
     }
 }
 
-void salvarProdutosVendidos(struct produto *arr, int tam) {
+void salvarProdutosVendidos() {
 
     char filename[40];
 
@@ -134,12 +144,12 @@ void salvarProdutosVendidos(struct produto *arr, int tam) {
 
     fprintf(fp, "produtos_vendidos\n");
 
-    for(int i = 0; i < tam; i++) {
-        fprintf(fp, "\n%d\n", arr[i].codigo);
-        fprintf(fp, "%s\n", arr[i].nomeProduto);
-        fprintf(fp, "%.2f\n", arr[i].valorUnitario);
-        fprintf(fp, "%d\n", arr[i].quantEstoque);
-        fprintf(fp, "%d\n", arr[i].quantVendida);
+    for(int i = 0; i < numeroProdutos; i++) {
+        fprintf(fp, "\n%d\n", &p[i].codigo);
+        fprintf(fp, "%s\n", &p[i].nomeProduto);
+        fprintf(fp, "%.2f\n", &p[i].valorUnitario);
+        fprintf(fp, "%d\n", &p[i].quantEstoque);
+        fprintf(fp, "%d\n", &p[i].quantVendida);
     }
 
     fclose(fp);
@@ -185,7 +195,7 @@ void exibirProdutos(bool relatorio) {
 void menu() {
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\tBem-Vindo ao Mercado da Berenice\n\n");
-    printf("\t\tSelecione um dos números referentes a operação\n");
+    printf("\t\tSelecione um dos números referentes à operação\n");
     printf("\t\t1- Produtos\n");
     printf("\t\t2- Vendas\n");
     printf("\t\t3- Sair\n");
@@ -231,7 +241,7 @@ void produtos() {
 
     printf("---------------------------------------------------------------------------------------------\n");
     printf("\t\tProdutos\n\n");
-    printf("\t\tSelecione um dos números referentes a operação\n");
+    printf("\t\tSelecione um dos números referentes à operação\n");
     printf("\t\t1- Exibir\n");
     printf("\t\t2- Cadastrar\n");
     printf("\t\t3- Atualizar\n");
@@ -265,6 +275,7 @@ void produtos() {
         deletar();
         break;
     case 5:
+        salvarProdutosCadastrados();
         break;
     case 6:
         break;
@@ -275,29 +286,11 @@ void produtos() {
     }
 }
 
-void exibir() {
-    int voltar;
-    int codigo[5] = {18475, 45462, 34654, 40, 5000};
-    float preco[5] = {7.50, 8.69, 5.00, 4.50, 3.25};
-
-    printf("---------------------------------------------------------------------------------------------\n");
-    printf("\t\tItem(Código)\tNome do Item\tValor(Unidade)\tEstoque\n");
-    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[0], "Pão de Forma", preco[0]); //estoqueItens[0]);
-    printf("\t\t%i\t\t%s\tR$%.2f\t\t%d\n", codigo[1], "Pão de Centeio", preco[1]); //estoqueItens[1]);
-    printf("\t\t\%i\t\t%s\tR$%.2f\t\t%d\n", codigo[2], "Broa de Milho", preco[2]); //estoqueItens[2]);
-    printf("\t\t%i\t\t%s\t\tR$%.2f\t\t%d\n", codigo[3], "Sonho", preco[3]); //estoqueItens[3]);
-    printf("\t\t%i\t\t%s\t\tR$%.2f\t\t%d\n", codigo[4], "Tubaína", preco[4]); //estoqueItens[4]);
-    printf("---------------------------------------------------------------------------------------------\n");
-    printf("Digite um número qualquer para voltar para o menu\n");
-    scanf("%d", &voltar);
-    getchar();
-}
-
 void submenuvendas() {
     limparTela();
     int opcaovendas;
     printf("---------------------------------------------------------------------------------------------\n");
-    printf("\t\tSelecione um dos números referentes a operação\n\n");
+    printf("\t\tSelecione um dos números referentes à operação\n\n");
     printf("\t\t1- Realizar venda\n");
     printf("\t\t2- Relatório de Vendas\n");
     printf("\t\t3- Voltar\n");
@@ -324,13 +317,13 @@ void submenuvendas() {
 
 void cadastra() {
     //Solicita ao usuario o tamanho que ele quer que tenha alocado na memória para armarzenar os caracteres
-    printf("Numero de produtos: ");
+    printf("Número de produtos: ");
     scanf("%d",&num);
     getchar();
     printf("\n");
 
     while(num <= 0) {
-        printf("\nQuantidade invalida. Digite um numero maior que zero: ");
+        printf("\nQuantidade inválida. Digite um número maior que zero: ");
         scanf("%d",&num);
         getchar();
         printf("\n");
@@ -347,12 +340,12 @@ void cadastra() {
         printf("Produto %d\n", (i+1));
 
         // Add validação
-        printf("Codigo do produto: ");
+        printf("Código do produto: ");
         scanf("%d",&p[i].codigo);
         getchar();
 
         while(p[i].codigo <= 0) {
-            printf("Codigo invalido, digitar um codigo unico e maior que zero: ");
+            printf("Código inválido, digitar um código único e maior que zero: ");
             scanf("%d",&p[i].codigo);
             getchar();
         }
@@ -362,12 +355,12 @@ void cadastra() {
         gets(&p[i].nomeProduto);//ponteiro aponta pra quantidade de cadastros a ser alocadae no nome produto
 
         // Não precisa de validação
-        printf("Valor unitario: R$ ");
+        printf("Valor unitário: R$ ");
         scanf("%f",&p[i].valorUnitario);
         getchar();
 
         while(p[i].valorUnitario <= 0) {
-            printf("Valor invalido, digitar um valor maior que zero: ");
+            printf("Valor inválido, digitar um valor maior que zero: ");
             scanf("%d",&p[i].valorUnitario);
             getchar();
         }
@@ -377,7 +370,7 @@ void cadastra() {
         getchar();
 
         while(p[i].quantEstoque <= 0) {
-            printf("Quantidade de estoque invalida, digitar um numero maior que zero: ");
+            printf("Quantidade de estoque inválida, digitar um número maior que zero: ");
             scanf("%d",&p[i].quantEstoque);
             getchar();
         }
@@ -393,14 +386,14 @@ void deletar() {
 
     int pos;
 
-    printf("Codigo\t\tNome\t\tValor Unitario\t\tEstoque\n");
+    printf("Código\t\tNome\t\tValor Unitário\t\tEstoque\n");
     for(int i = 0; i < *numeroProdutos; i++) {
         if(&p[i]) {
             printf("%d\t\t%s\t\tR$ %.2f\t\t%d\n", p[i].codigo, p[i].nomeProduto, p[i].valorUnitario, p[i].quantEstoque);
         }
     }
 
-    printf("\nDigite o codigo do produto a ser excluido: ");
+    printf("\nDigite o código do produto a ser excluido: ");
     scanf("%d", &pos);
     getchar();
 
@@ -411,7 +404,7 @@ void deletar() {
                 free(&p[i]);
             }
         }
-        printf("Produto de codigo %d excluido. Retornando ao menu principal.\n", pos);
+        printf("Produto de código %d excluído. Retornando ao menu principal.\n", pos);
         transicao(1000);
         menu();
     }
