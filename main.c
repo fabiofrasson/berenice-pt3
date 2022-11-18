@@ -5,8 +5,7 @@
 #include "header.h"
 #include "produto.h"
 
-int main()
-{
+int main() {
     setlocale(LC_ALL, "Portuguese");
     menu();
     return 0;
